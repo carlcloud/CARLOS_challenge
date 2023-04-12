@@ -13,8 +13,8 @@ resource "aws_internet_gateway" "challenge_gateway" {
 # Creating 1st subnet 
 resource "aws_subnet" "challenge_pub_sub-01" {
   vpc_id                  = aws_vpc.challenge_vpc.id
-  cidr_block              = var.subnet_cidr_1
-  map_public_ip_on_launch = var.public_ip
+  cidr_block              = var.subnet_cidr[0]
+  map_public_ip_on_launch = var.public_ip_on_launch
   availability_zone       = var.availability_zone[0]
   tags = {
     Name = "challenge_pub_sub-01"
@@ -23,8 +23,8 @@ resource "aws_subnet" "challenge_pub_sub-01" {
 # Creating 2nd subnet 
 resource "aws_subnet" "challenge_pub_sub-02" {
   vpc_id                  = aws_vpc.challenge_vpc.id
-  cidr_block              = var.subnet_cidr_2
-  map_public_ip_on_launch = var.public_ip
+  cidr_block              = var.subnet_cidr[1]
+  map_public_ip_on_launch = var.public_ip_on_launch
   availability_zone       = var.availability_zone[1]
   tags = {
     Name = "challenge_pub_sub-02"

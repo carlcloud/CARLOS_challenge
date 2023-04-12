@@ -14,7 +14,7 @@ data "aws_route53_zone" "my_zone" {
 
 resource "aws_route53_record" "challenge_record" {
   zone_id = data.aws_route53_zone.my_zone.zone_id
-  name    = "sed-challenge.${var.my_zone}"
+  name    = "challenge.${var.my_zone}"
   type    = "A"
 
   alias {
@@ -23,3 +23,4 @@ resource "aws_route53_record" "challenge_record" {
     evaluate_target_health = true
   }
 }
+
