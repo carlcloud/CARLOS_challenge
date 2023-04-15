@@ -3,6 +3,10 @@ availability_zone = ["us-east-1a", "us-east-1b"]
 
 regions =  "us-east-1"
 
+instance_type = "t2.micro"
+
+image_id = "ami-007855ac798b5175e"
+
 public_ip_on_launch = true
 
 subnet_cidr  = ["10.0.1.0/24", "10.0.2.0/24"]

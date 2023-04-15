@@ -1,5 +1,5 @@
 resource "aws_autoscaling_policy" "challenge_policy" {
-  name                   = "policy"
+  name                   = "challenge-policy"
   scaling_adjustment     = 2
   adjustment_type        = "ChangeInCapacity"
   cooldown               = 120
@@ -8,21 +8,20 @@ resource "aws_autoscaling_policy" "challenge_policy" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "cloudwatch" {
-  alarm_name          = "terraform-test-foobar5"
+  alarm_name          = "challenge-watch"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = 2
   metric_name         = "CPUUtilization"
   namespace           = "AWS/EC2"
   period              = 120
   statistic           = "Average"
-  threshold           = 80
+  threshold           = 70
   alarm_description   = "This metric monitors ec2 cpu utilization"
   dimensions = {
     "autoscaling_group_name" : aws_autoscaling_group.challenge_asg.name
   }
   actions_enabled           = true
   alarm_actions             = [aws_autoscaling_policy.challenge_policy.arn]
-  insufficient_data_actions = []
 }
 
 

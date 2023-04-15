@@ -11,7 +11,6 @@ resource "aws_lb" "challenge_alb" {
   enable_cross_zone_load_balancing = true
 }
 
-
 resource "aws_lb_listener" "https_listener" {
   load_balancer_arn = aws_lb.challenge_alb.arn
   port              = "443"
@@ -45,31 +44,22 @@ resource "aws_lb_target_group" "challenge_target" {
   port     = 80
   protocol = "HTTP"
   vpc_id   = aws_vpc.challenge_vpc.id
-  # target_type = "alb"
 
   health_check {
     enabled  = true
     path     = "/"
     port     = 80
     matcher  = "200"
-    timeout  = 60
-    interval = 180
+    timeout  = 120
+    interval = 300
     unhealthy_threshold = 3
     healthy_threshold = 3
   }
-
-  # health_check {
-  #   healthy_threshold   = 2
-  #   interval            = 30
-  #   protocol            = "HTTP"
-  #   unhealthy_threshold = 2
-  # }
 
   lifecycle {
     create_before_destroy = true
   }
 }
-
 
 resource "aws_autoscaling_attachment" "target" {
   autoscaling_group_name = aws_autoscaling_group.challenge_asg.name

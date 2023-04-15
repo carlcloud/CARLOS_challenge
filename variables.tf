@@ -4,6 +4,14 @@ variable "key_name" {
   type        = string
   description = "Name of AWS key pair"
 }
+
+variable "instance_type" {
+  type = string
+}
+
+variable "image_id" {
+  type = string
+}
 # Defining CIDR Block for VPC
 variable "vpc_cidr" {
   type    = string
